@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    /* Variables */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+form {
+  width: 30vw;
+  min-width: 500px;
+  align-self: center;
+  box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
+    0px 2px 5px 0px rgba(50, 50, 93, 0.1), 0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
+  border-radius: 7px;
+  padding: 40px;
+}
+
+.hidden {
+  display: none;
+}
+
+#payment-message {
+  color: rgb(105, 115, 134);
+  font-size: 16px;
+  line-height: 20px;
+  padding-top: 12px;
+  text-align: center;
+}
+
+#payment-element {
+  margin-bottom: 24px;
+}
+
+/* Buttons and links */
+button {
+  background: #5469d4;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  border-radius: 4px;
+  border: 0;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: block;
+  transition: all 0.2s ease;
+  box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+  width: 100%;
+}
+button:hover {
+  filter: contrast(115%);
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* spinner/processing state, errors */
+.spinner,
+.spinner:before,
+.spinner:after {
+  border-radius: 50%;
+}
+.spinner {
+  color: #ffffff;
+  font-size: 22px;
+  text-indent: -99999px;
+  margin: 0px auto;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  box-shadow: inset 0 0 0 2px;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.spinner:before,
+.spinner:after {
+  position: absolute;
+  content: "";
+}
+.spinner:before {
+  width: 10.4px;
+  height: 20.4px;
+  background: #5469d4;
+  border-radius: 20.4px 0 0 20.4px;
+  top: -0.2px;
+  left: -0.2px;
+  -webkit-transform-origin: 10.4px 10.2px;
+  transform-origin: 10.4px 10.2px;
+  -webkit-animation: loading 2s infinite ease 1.5s;
+  animation: loading 2s infinite ease 1.5s;
+}
+.spinner:after {
+  width: 10.4px;
+  height: 10.2px;
+  background: #5469d4;
+  border-radius: 0 10.2px 10.2px 0;
+  top: -0.1px;
+  left: 10.2px;
+  -webkit-transform-origin: 0px 10.2px;
+  transform-origin: 0px 10.2px;
+  -webkit-animation: loading 2s infinite ease;
+  animation: loading 2s infinite ease;
+}
+
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  form {
+    width: 80vw;
+    min-width: initial;
+  }
+}
+    <title>Froala Design Blocks - </title>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link type="text/css" rel="stylesheet" href="css/froala_blocks.css">
+    <style>
+      .fdb-block {
+        border-bottom: 1px solid var(--light);
+      }
+    </style>
+  </head>
+  <body><style>
+  #navigator {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+/* section.css */
+.section {
+background-color: black;
+color: white;
+padding: 20px;
+text-align: leaft;
+}
+.title {
+font-weight: bold; /* Make the title bold */
+font-size: 58px; /* Increase the font size */
+margin-bottom: 10px; /* Adjust the space between title and subtitle */
+}
+.subtitle {
+font-size: 20px;
+}
+
+/* Responsive layout for mobile devices */
+@media screen and (max-width: 600px) {
+.header {
+padding: 10px;
+}
+.title {
+font-size: 30px; /* Adjust font size for mobile devices */
+}
+.subtitle {
+font-size: 18px; /* Adjust font size for mobile devices */
+}
+}
+
+
+/*column.css*/
+.column {
+float: left;
+width: 30%;
+padding: 20px;
+box-sizing: border-box;
+text-align: center;
+}
+
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other on smaller screens */
+@media screen and (max-width:100px) {
+.column {
+width: 100px;
+display: block;
+}
+}
+
+
+
+   index.js 
+
+    
+
+
+const stripe = Stripe('pk_test_51PZzciCyC8OWGlHKRThmLWoQvX29CC6L8d6ExLaM6xGYdXSAQ6ksP4yxqKRLHLvNIIw2OdweUNOe2iNXpCHpXH7W00k6g9ZBKG');
+
+const appearance = { /* appearance */ };
+const options = { /* options */ };
+const elements = stripe.elements({ clientSecret, appearance });
+const paymentElement = elements.create('payment', options);
+paymentElement.mount('#payment-element');
+
+
+const stripe = Stripe('pk_test_51PZzciCyC8OWGlHKRThmLWoQvX29CC6L8d6ExLaM6xGYdXSAQ6ksP4yxqKRLHLvNIIw2OdweUNOe2iNXpCHpXH7W00k6g9ZBKG');
+
+const appearance = { /* appearance */ };
+const options = {
+  layout: {
+    type: 'tabs',
+    defaultCollapsed: false,
+  }
+};
+const elements = stripe.elements({ clientSecret, appearance });
+const paymentElement = elements.create('payment', options);
+paymentElement.mount('#payment-element');
+
+
+const stripe = Stripe('pk_test_51PZzciCyC8OWGlHKRThmLWoQvX29CC6L8d6ExLaM6xGYdXSAQ6ksP4yxqKRLHLvNIIw2OdweUNOe2iNXpCHpXH7W00k6g9ZBKG');
+
+const appearance = {
+  theme: 'flat',
+  variables: { colorPrimaryText: '#262626' }
+};
+const options = { /* options */ };
+const elements = stripe.elements({ clientSecret, appearance });
+const paymentElement = elements.create('payment', options);
+paymentElement.mount('#payment-element');
+
+
+
+
+const stripe = Stripe('pk_test_51PZzciCyC8OWGlHKRThmLWoQvX29CC6L8d6ExLaM6xGYdXSAQ6ksP4yxqKRLHLvNIIw2OdweUNOe2iNXpCHpXH7W00k6g9ZBKG');
+
+const appearance = { /* appearance */};
+const options = {
+  business: "RocketRides"
+};
+const clientSecret = {{CLIENT_SECRET}};
+const elements = stripe.elements(appearance, clientSecret);
+const paymentElement = elements.create('payment', options);
+paymentElement.mount('#payment-element');
+
+
+
+
+
+
+    donate.js
+
+
+    
+// Initialize Stripe with your publishable key
+var stripe = Stripe('pk_live_51PZzciCyC8OWGlHKxmnWEFHf35h9eqQdLfXkQy4coHfiKFfs4Q0znWh7qHi7N9TKNWnlnttZ8kAgtKK0ygmBp5Nn00DvLhJnlx');
+
+// Function to update the displayed amount and handle the selected class
+function updateDisplayedAmount(amount, button) {
+document.getElementById('donateNow').innerText = 'Donate ' + amount + ' Tk';
+// Remove selected class from all buttons
+var donationButtons = document.querySelectorAll('.donation-button');
+donationButtons.forEach(function(btn) {
+btn.classList.remove('selected');
+});
+// Add selected class to the clicked button
+if (button) {
+button.classList.add('selected');
+}
+}
+
+// Event listeners for the donation buttons
+var donationButtons = document.querySelectorAll('.donation-button');
+donationButtons.forEach(function(button) {
+button.addEventListener('click', function() {
+var amount = this.getAttribute('data-amount');
+updateDisplayedAmount(amount, this); // Pass the clicked button as well
+});
+});
+
+// Event listener for the custom amount input
+document.getElementById('customAmount').addEventListener('input', function() {
+var amount = this.value;
+updateDisplayedAmount(amount); // Update the display
+});
+
+// Modify the existing donateNow click event handler
+document.getElementById('donateNow').addEventListener('click', function() {
+// Get the selected amount from the selected donation button or the custom amount input
+var selectedAmount = document.querySelector('.donation-button.selected')?.getAttribute('data-amount') || document.getElementById('customAmount').value;
+
+// Check if the selected amount is not empty or null
+if (selectedAmount && selectedAmount.trim() !== '') {
+console.log('Selected donation amount: ' + selectedAmount + ' Tk');
+
+// Redirect to Stripe checkout page with the selected amount
+stripe.redirectToCheckout({
+lineItems: [{ price: 'price_ID', quantity: 1 }], // Replace 'price_ID' with your actual price ID
+mode: 'payment',
+successUrl: window.location.protocol + '//' + window.location.host + '/success.html', // Replace with your success URL
+cancelUrl: window.location.protocol + '//' + window.location.host + '/cancel.html', // Replace with your cancel URL
+}).then(function (result) {
+if (result.error) {
+// If `redirectToCheckout` fails due to a browser or network
+// error, display the localized error message to your customer.
+alert(result.error.message);
+}
+});
+} else {
+// If no amount is selected, alert the user and do not proceed to checkout
+alert('Please select an amount to donate.');
+}
+});
+
+
+
+  
+
+script.js
+
+
+
+
+  // script.js
+document.addEventListener('DOMContentLoaded', (event) => {
+// Function to show a message when a social media link is clicked
+function showMessage(socialMediaName) {
+alert('Thank you for visiting our ' + socialMediaName + ' page!');
+}
+
+// Add click event listeners to social media links
+const socialLinks = document.querySelectorAll('.social-icons a');
+socialLinks.forEach(link => {
+link.addEventListener('click', (e) => {
+e.preventDefault(); // Prevent the default link behavior
+const socialMediaName = link.textContent.trim();
+showMessage(socialMediaName);
+window.open(link.href, '_blank'); // Open the link in a new tab
+});
+});
+});
+
+
+
+
+
+
+checkout.js
+
+
+
+
+
+  // This is your test publishable API key.
+const stripe = Stripe("pk_test_51PZzciCyC8OWGlHKRThmLWoQvX29CC6L8d6ExLaM6xGYdXSAQ6ksP4yxqKRLHLvNIIw2OdweUNOe2iNXpCHpXH7W00k6g9ZBKG");
+
+// The items the customer wants to buy
+const items = [{ id: "xl-tshirt" }];
+
+let elements;
+
+initialize();
+checkStatus();
+
+document
+  .querySelector("#payment-form")
+  .addEventListener("submit", handleSubmit);
+
+// Fetches a payment intent and captures the client secret
+async function initialize() {
+  const response = await fetch("/create-payment-intent", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ items }),
+  });
+  const { clientSecret } = await response.json();
+
+  const appearance = {
+    theme: 'stripe',
+  };
+  elements = stripe.elements({ appearance, clientSecret });
+
+  const paymentElementOptions = {
+    layout: "tabs",
+  };
+
+  const paymentElement = elements.create("payment", paymentElementOptions);
+  paymentElement.mount("#payment-element");
+}
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  setLoading(true);
+
+  const { error } = await stripe.confirmPayment({
+    elements,
+    confirmParams: {
+      // Make sure to change this to your payment completion page
+      return_url: "http://localhost:4242/checkout.html",
+    },
+  });
+
+  // This point will only be reached if there is an immediate error when
+  // confirming the payment. Otherwise, your customer will be redirected to
+  // your `return_url`. For some payment methods like iDEAL, your customer will
+  // be redirected to an intermediate site first to authorize the payment, then
+  // redirected to the `return_url`.
+  if (error.type === "card_error" || error.type === "validation_error") {
+    showMessage(error.message);
+  } else {
+    showMessage("An unexpected error occurred.");
+  }
+
+  setLoading(false);
+}
+
+// Fetches the payment intent status after payment submission
+async function checkStatus() {
+  const clientSecret = new URLSearchParams(window.location.search).get(
+    "payment_intent_client_secret"
+  );
+
+  if (!clientSecret) {
+    return;
+  }
+
+  const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
+
+  switch (paymentIntent.status) {
+    case "succeeded":
+      showMessage("Payment succeeded!");
+      break;
+    case "processing":
+      showMessage("Your payment is processing.");
+      break;
+    case "requires_payment_method":
+      showMessage("Your payment was not successful, please try again.");
+      break;
+    default:
+      showMessage("Something went wrong.");
+      break;
+  }
+}
+
+// ------- UI helpers -------
+
+function showMessage(messageText) {
+  const messageContainer = document.querySelector("#payment-message");
+
+  messageContainer.classList.remove("hidden");
+  messageContainer.textContent = messageText;
+
+  setTimeout(function () {
+    messageContainer.classList.add("hidden");
+    messageContainer.textContent = "";
+  }, 4000);
+}
+
+// Show a spinner on payment submission
+function setLoading(isLoading) {
+  if (isLoading) {
+    // Disable the button and show a spinner
+    document.querySelector("#submit").disabled = true;
+    document.querySelector("#spinner").classList.remove("hidden");
+    document.querySelector("#button-text").classList.add("hidden");
+  } else {
+    document.querySelector("#submit").disabled = false;
+    document.querySelector("#spinner").classList.add("hidden");
+    document.querySelector("#button-text").classList.remove("hidden");
+  }
+}
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+
+    
+
+  #navigator .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  }
+
+  @media (max-width: 720px) {
+    #navigator {
+      border-bottom: 1px solid #ccc;
+    }
+  }
+
+  #navigator a {
+    font-size: 14px;
+  }
+
+  #navigator+section {
+    padding: 250px 0;
+  }
+
+</style>
+
+<section class="fdb-block p-2" id="navigator">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-md">
+      <button class="navbar-toggler mr-auto ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav0" aria-controls="navbarNav0" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse mt-2 mt-md-0" id="navbarNav0">
+        <p class="m-auto">
+          <a class="btn btn-outline-primary m-1" href="call-to-action.html">Call to action</a>
+          <a class="btn btn-outline-primary m-1" href="contacts.html">Contacts</a>
+          <a class="btn btn-outline-primary m-1" href="contents.html">Contents</a>
+          <a class="btn btn-outline-primary m-1" href="features.html">Features</a>
+          <a class="btn btn-outline-primary m-1" href="footers.html">Footers</a>
+          <a class="btn btn-outline-primary m-1" href="forms.html">Forms</a>
+          <a class="btn btn-outline-primary m-1" href="headers.html">Headers</a>
+          <a class="btn btn-outline-primary m-1" href="pricings.html">Pricings</a>
+          <a class="btn btn-outline-primary m-1" href="teams.html">Teams</a>
+          <a class="btn btn-outline-primary m-1" href="testimonials.html">Testimonials</a>
+        </p>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<script>
+  var page = window.location.pathname.split('/')
+  page = page[page.length - 1]
+
+  var nav = document.querySelector('a[href="' + page + '"]')
+  if (nav) {
+    nav.classList.add('active')
+  }
+
+</script>
+
+    <!--  1 -->
+    <section class="fdb-block">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 text-center">
+            <p class="lead">
+              "Separated they live in Bookmarksgrove right at the coast of the Semantics, far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast."
+            </p>
+    
+            <p class="mt-5 mt-sm-4">
+              <a class="btn btn-primary" href="https://www.froala.com">Download</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    ,    <section class="fdb-block">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-6 text-center">
+            <h1>Call to Action</h1>
+            <p class="lead">
+              Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts
+            </p>
+            <p class="mt-5 mt-sm-4">
+              <a class="btn btn-secondary" href="https://www.froala.com">Download</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    ,    <section class="fdb-block">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-sm-8 col-md-6 col-lg-6 text-center">
+            <h2>
+              <strong>Right at the coast of the Semantics, a large language ocean.</strong>
+            </h2>
+            <p class="mt-5 mt-sm-4">
+              <a class="btn btn-outline-primary" href="https://www.froala.com">Download</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+,    <section class="fdb-block">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col">
+            <h1>Pricing Plans</h1>
+          </div>
+        </div>
+    
+        <div class="row mt-5 align-items-top">
+          <div class="col-12 col-sm-10 col-md-8 m-auto col-lg-4 text-center">
+            <div class="bg-gray pb-5 pt-5 pl-4 pr-4 rounded">
+              <h3><strong>Startup</strong></h3>
+              <p class="h4">&lt; 10 employees</p>
+    
+              <p class="h1 mt-5">$9.90 <span class="lead">/ month</span></p>
+              <p>Far far away, behind the word mountains, far from the countries.</p>
+              <hr>
+              <p><em>Unlimited calls</em></p>
+              <p><em>Free hosting</em></p>
+              <p><em>40MB of storage</em></p>
+    
+              <p class="text-center pt-5"><a href="https://www.froala.com" class="btn btn-primary">Subscribe</a></p>
+            </div>
+          </div>
+    
+          <div class="col-12 col-sm-10 col-md-8 m-auto col-lg-4 text-center pt-4 pt-lg-0">
+            <div class="bg-gray pb-5 pt-5 pl-4 pr-4 rounded">
+              <h3><strong>Agency</strong></h3>
+              <p class="h4">10-100 employees</p>
+    
+              <p class="h1 mt-5">$19.90 <span class="lead">/ month</span></p>
+              <p>And if she hasn’t been rewritten, then they are still using her.</p>
+              <hr>
+              <p><em>Unlimited calls</em></p>
+              <p><em>Free hosting</em></p>
+              <p><em>40MB of storage</em></p>
+    
+              <p class="text-center pt-5"><a href="https://www.froala.com" class="btn btn-primary">Subscribe</a></p>
+            </div>
+          </div>
+    
+          <div class="col-12 col-sm-10 col-md-8 m-auto col-lg-4 text-center pt-4 pt-lg-0">
+            <div class="bg-gray pb-5 pt-5 pl-4 pr-4 rounded">
+              <h3><strong>Business</strong></h3>
+              <p class="h4">&gt;100 employees</p>
+    
+              <p class="h1 mt-5">$99.90 <span class="lead">/ month</span></p>
+              <p>Separated they live in Bookmarksgrove right at the coast of the Semantics.</p>
+              <hr>
+              <p><em>Unlimited calls</em></p>
+              <p><em>Free hosting</em></p>
+              <p><em>40MB of storage</em></p>
+    
+              <p class="text-center pt-5"><a href="https://www.froala.com" class="btn btn-primary">Subscribe</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+    </section>
+  </body>
+</html>
