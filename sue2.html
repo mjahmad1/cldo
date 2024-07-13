@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donation Button</title>
+
+<style>
+.donation-button {
+background-color: #4CAF50; /* Green */
+border: none;
+color: white;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<button class="donation-button" onclick="handleDonation()">Donate Now</button>
+
+<script>
+  {
+  "id": "pmd_1Pa2LTCyC8OWGlHKi6VSeHVo",
+  "apple_pay": {
+    "status": "inactive",
+    "status_details": {
+      "error_message": "You do not have the correct file hosted at https://mjahmad.com/.well-known/apple-developer-merchantid-domain-association. To verify with Apple that you control your domain, you must host this file: https://stripe.com/files/apple-pay/apple-developer-merchantid-domain-association. For more information, see https://stripe.com/docs/payments/payment-methods/pmd-registration.",
+      "message_code": "apple_pay_wrong_verification_file",
+      "metadata": {
+        "domain": "mjahmad.com"
+      }
+    }
+  },
+  "created": 1720386607,
+  "domain_name": "mjahmad.com",
+  "enabled": true
+}
+  {
+  "include_only": [
+    "id,domain_name,enabled,created,apple_pay.status,apple_pay.status_details.error_message,apple_pay.status_details.message_code,apple_pay.status_details.metadata"
+  ]
+}
+  {
+  "domain_name": "mjahmad.com"
+}
+</script>
+  <script>
+{
+  "object": {
+    "id": "acct_1PZzciCyC8OWGlHK",
+    "object": "account",
+    "business_profile": {
+      "annual_revenue": null,
+      "estimated_worker_count": null,
+      "mcc": "7299",
+      "name": null,
+      "support_address": null,
+      "support_email": null,
+      "support_phone": "+88001920082926",
+      "support_url": null,
+      "url": "https://mjahmad.com"
+    },
+    "capabilities": {
+      "afterpay_clearpay_payments": "active",
+      "bancontact_payments": "active",
+      "card_payments": "active",
+      "cartes_bancaires_payments": "pending",
+      "eps_payments": "active",
+      "gb_bank_transfer_payments": "inactive",
+      "ideal_payments": "active",
+      "klarna_payments": "active",
+      "link_payments": "active",
+      "p24_payments": "active",
+      "revolut_pay_payments": "active",
+      "transfers": "active",
+      "us_bank_transfer_payments": "inactive"
+    },
+    "charges_enabled": true,
+    "controller": {
+      "type": "account"
+    },
+    "country": "GB",
+    "default_currency": "gbp",
+    "details_submitted": true,
+    "email": "quranerfariwala@gmail.com",
+    "payouts_enabled": true,
+    "settings": {
+      "bacs_debit_payments": {
+        "display_name": "Stripe",
+        "service_user_number": "449900"
+      },
+      "branding": {
+        "icon": null,
+        "logo": null,
+        "primary_color": null,
+        "secondary_color": null
+      },
+      "card_issuing": {
+        "tos_acceptance": {
+          "date": null,
+          "ip": null
+        }
+      },
+      "card_payments": {
+        "statement_descriptor_prefix": null,
+        "statement_descriptor_prefix_kana": null,
+        "statement_descriptor_prefix_kanji": null
+      },
+      "dashboard": {
+        "display_name": "MJ-AHMAD",
+        "timezone": "Asia/Dhaka"
+      },
+      "invoices": {
+        "default_account_tax_ids": null
+      },
+      "payments": {
+        "statement_descriptor": "INNOVATE ",
+        "statement_descriptor_kana": null,
+        "statement_descriptor_kanji": null
+      },
+      "sepa_debit_payments": {
+      }
+    },
+    "type": "standard"
+  },
+  "previous_attributes": {
+    "business_profile": {
+      "mcc": "8299"
+    }
+  }
+}
+
+</script>
+  
+<!-- আপনার HTML ফর্ম -->
+<form method="post" action="আপনার সার্ভারের পেমেন্ট প্রসেসিং URL">
+<!-- পেমেন্ট তথ্য ইনপুট ফিল্ড -->
+<input type="text" id="card-number" placeholder="কার্ড নম্বর">
+<input type="text" id="cvv" placeholder="CVV">
+<input type="text" id="expiration-date" placeholder="মেয়াদ শেষের তারিখ">
+<!-- সাবমিট বাটন -->
+<button type="submit" id="submit-button">পেমেন্ট করুন</button>
+</form>
+
+<!-- Square পেমেন্ট স্ক্রিপ্ট -->
+<script type="text/javascript" src="https://js.squareup.com/v2/paymentform">
+</script>
+
+<script>
+// Square পেমেন্ট ফর্ম ইনিশিয়ালাইজেশন এবং কনফিগারেশন
+var paymentForm = new SqPaymentForm({
+// আপনার কনফিগারেশন অপশন
+});
+
+// পেমেন্ট ফর্ম সাবমিট হ্যান্ডলার
+paymentForm.build();
+document.getElementById('submit-button').addEventListener('click', function(e) {
+e.preventDefault();
+paymentForm.requestCardNonce();
+});
+</script>
+
+</body>
+</html>
+
+<div style="margin-top: 100px">    <div        id="widget-here-C01Pl"        class="widget-here"        data-shortcode="C01Pl"        data-lang="auto"        data-success_url=""        data-fail_url=""        value="donation-widget"    >
+  
+</div>
+</div>
+<link    rel="stylesheet"    href="https://plugin.whydonate.com/wdplugin-style.css"/>
+<script    src="https://plugin.whydonate.com/wp_styling.js"    type="text/javascript"></script>
