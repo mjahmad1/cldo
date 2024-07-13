@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ডোনেশন পেজ</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+<header>
+<h1>ডোনেশন পেজ</h1>
+</header>
+<main>
+<button id="donate-button">ডোনেট করুন</button>
+</main>
+<script src="scripts.js"></script>
+</body>
+</html>
+
+CSS (styles.css)
+body {
+font-family: Arial, sans-serif;
+text-align: center;
+margin: 0;
+padding: 0;
+background-color: #f4f4f4;
+}
+
+header {
+background-color: #333;
+color: #fff;
+padding: 1em 0;
+}
+
+main {
+padding: 2em;
+}
+
+button {
+background-color: #28a745;
+color: #fff;
+border: none;
+padding: 1em 2em;
+font-size: 1.2em;
+cursor: pointer;
+border-radius: 5px;
+}
+
+button:hover {
+background-color: #218838;
+}
+
+JavaScript (scripts.js)
+document.addEventListener('DOMContentLoaded', function() {
+var stripe = Stripe('Stripe.apiKey = "sk_test_51PZzciCyC8OWGlHKE542bwYjZnBTEmCd4nTubWatfDsfQUWXV3pNVe6MDhhYLSJWjwR4CZ9FYNAVCE56cfbIpP2Z00uh7EeZOl";'); // আপনার স্ট্রাইপ পাবলিক কী এখানে বসান
+
+var donateButton = document.getElementById('donate-button');
+donateButton.addEventListener('click', function() {
+stripe.redirectToCheckout({
+lineItems: [{
+price: "pk_live_51PZzciCyC8OWGlHKxmnWEFHf35h9eqQdLfXkQy4coHfiKFfs4Q0znWh7qHi7N9TKNWnlnttZ8kAgtKK0ygmBp5Nn00DvLhJnlx", // আপনার প্রাইস আইডি এখানে বসান
+quantity: 1
+}],
+mode: 'payment',
+successUrl: 'https://your-website.com/success',
+cancelUrl: 'https://your-website.com/cancel'
+}).then(function (result) {
+if (result.error) {
+alert(result.error.message);
+}
+});
+});
+});
